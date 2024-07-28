@@ -3,13 +3,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data.Models
 {
-    public class User:BaseModel
+    public class User : BaseModel
     {
-        public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]
-        public string Role { get; set; }
-       
+        public Role Role { get; set; }
+        public string LastName { get; set; }
+        public int? DepartmentId { get; set; }
+        public Department Department { get; set; }
+        //public int? FacultyId { get; set; }
+        //public Faculty Faculty { get; set; }
+        public int? Year { get; set; }
+        public ICollection<StudentLesson> StudentLessons { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }

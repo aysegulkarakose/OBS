@@ -2,9 +2,17 @@
 {
     public class BaseModel
     {
-        public int Id { get; set; }   
+        public int Id { get; set; }
         public string Name { get; set; }
-        public bool isDeleted { get; set; } = false;
-        public bool isActive { get; set; } = true;
+        public bool IsDeleted { get; set; } = false;
+        public bool IsActive { get; set; } = true;
+
+    }
+    public enum Role
+    {
+        Student=1,
+        Teacher=2,
+        Admin=3
+
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LessonTimesController : ControllerBase
     {
@@ -15,14 +15,14 @@ namespace Api.Controllers
             _lessonTimeService = lessonTimeService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<LessonTime>>> GetAllLessonTimes()
-        {
-            var lessonTimes = await _lessonTimeService.GetAllLessonTimesAsync();
-            return Ok(lessonTimes);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<LessonTime>>> GetAllLessonTimes()
+        //{
+        //    var lessonTimes = await _lessonTimeService.GetAllLessonTimesAsync();
+        //    return Ok(lessonTimes);
+        //}
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<ActionResult<LessonTime>> GetLessonTimeById(int id)
         {
             var lessonTime = await _lessonTimeService.GetLessonTimeByIdAsync(id);
@@ -40,7 +40,7 @@ namespace Api.Controllers
             return CreatedAtAction(nameof(GetLessonTimeById), new { id = addedLessonTime.Id }, addedLessonTime);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult> UpdateLessonTime(int id, LessonTime lessonTime)
         {
             if (id != lessonTime.Id)
@@ -52,7 +52,7 @@ namespace Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteLessonTime(int id)
         {
             var deletedLessonTime = await _lessonTimeService.DeleteLessonTimeAsync(id);

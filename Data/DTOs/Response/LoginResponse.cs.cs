@@ -1,4 +1,4 @@
-﻿namespace Api.DTOs.Response
+﻿namespace Data.DTOs.Response
 {
     public class LoginResponse
     {

@@ -1,9 +1,6 @@
-﻿using Data.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Data.Models;
+using Data.Utilities;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
@@ -11,7 +8,10 @@ namespace Data.Repositories
     {
         Task<ApiResult<TEntity>> GetByIdAsync(object id);
         Task<ApiResult<TEntity>> GetByIdAsync(object id, params Expression<Func<TEntity, object>>[] includes);
-        Task<ApiResult<IList<TEntity>>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null, bool? asNoTracking = true, bool? deletedData = false, params Expression<Func<TEntity, object>>[] includes);
+        Task<ApiResult<IList<TEntity>>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null,
+                                                bool? asNoTracking = true,
+                                                bool? deletedData = false,
+                                                params Expression<Func<TEntity, object>>[] includes);
         Task<ApiResult<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, bool? asNoTracking = true, bool? deletedData = false, params Expression<Func<TEntity, object>>[] includes);
         Task<ApiResult<IList<TEntity>>> AddRangeAsync(IEnumerable<TEntity> entities);
         Task<ApiResult<TEntity>> AddAsync(TEntity entity);
@@ -23,7 +23,15 @@ namespace Data.Repositories
         Task<int> CountAsync(Expression<Func<TEntity, bool>> filter = null);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter);
         void SaveChanges();
-        Task SaveChangesAsync();
+        Task<bool> SaveChangesAsync();
         void Dispose();
+        Task<User> Authenticate(string username, string password);
+        Task<User> CreateUserAsync(User user);
+        Task<User> GetById(int id);
+
+    }
+    public interface IDepartmentRepository : IRepository<Department>
+    {
+        Task<IEnumerable<Department>> GetDepartmentsByFacultyAsync(Faculty faculty);
     }
 }
